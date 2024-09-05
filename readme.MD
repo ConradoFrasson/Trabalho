@@ -158,3 +158,97 @@ const deletarLivro = (req, res) => {
     }
     
     module.exports = deletarLivro;
+
+### Estudantes
+
+Explicarei tudo relevante sobre os estudantes, a seguir.
+
+#### ADICIONAR
+
+##### Serve para você adicionar um novo estudante ao sistema.
+
+    const estudantes = require('../data');
+
+    function criarEstudante(req, res) {
+    console.log(req.body);
+    const novoEstudante = {
+    id: estudantes.length + 1,
+    nome: req.body.titulo,
+    matricula: req.body.matricula,
+    curso: req.body.curso,
+    ano: req.body.curso
+    };
+    estudantes.push(novoEstudante)
+    res
+    .status(201)
+    .send({message: 'Baralho criado com sucesso!', estudantes: novoEstudante});
+    }
+
+    module.exports = criarEstudante
+
+#### ATUALIZAR
+
+##### Serve para você atualizar um estudante já existente.
+
+    const estudantes = require('../data');
+
+const atualizarEstudante = (req, res) => {
+    const { id } = req.params;
+    const novoNome = req.body.nome
+    const novaMatricula = req.body.novaMatricula
+    const novoCurso = req.body.curso
+    const novoAno = req.body.ano
+
+    const estudante = estudantes.find((b) => b.id == id);
+
+    if (!estudante) {
+        return res.status(404).send({ message: 'Estudante não encontrado' });
+    }
+
+        estudante.nome = novoNome
+        estudante.matricula = novaMatricula
+        estudante.curso = novoCurso
+        estudante.ano = novoAno
+        res.status(200).send({
+            message: 'Estudante atualizado com sucesso!',
+            estudante: estudante
+    });
+    }
+
+    module.exports = atualizarEstudante;
+
+#### DELETAR
+
+##### Serve para você deletar um estudante ja esxistente.
+
+    const estudantes = require('../data')
+
+const deltarEstudante = (req, res) => {
+    const { id } = req.params;
+    const index = estudantes.findIndex((b) => b.id == id);
+
+    if (index === -1) {
+        return res.status(404).send('Estudante não encontrado!');
+    }
+
+    const estudanteDeletado = estudantes.splice(index, 1)[0];
+
+    res.status(200).send({
+        message: 'Estudante deletado com sucesso!',
+        estudante: estudanteDeletado
+    })
+}
+
+module.exports = deltarEstudante;
+
+#### LISTAR
+
+##### Serve para você é para você listar todos os estudantes
+
+    const estudantes = require('../data');
+
+    const listarEstudantes = (req, res) => {
+    res.status(200).send(estudantes);
+    };
+
+    module.exports = listarEstudantes;
