@@ -28,3 +28,9 @@ let alugueis = [
         dataDevolucao: '2024-08-10'
     }
 ]
+
+module.exports = {
+    estudantes,
+    livros,
+    alugueis
+}
