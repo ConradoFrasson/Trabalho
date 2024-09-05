@@ -252,3 +252,98 @@ module.exports = deltarEstudante;
     };
 
     module.exports = listarEstudantes;
+
+
+### Aluguel
+
+Explicação das funções adicionar, alugar, atualizar e deletar alugueis do código em questão 
+
+#### ALUGAR
+
+##### Serve para você adicionar um novo aluguel de um livro ao sistema.
+
+    const {alugueis} = require('../data');
+    function alugar(req, res) {
+        console.log(req.body);
+        const novoAluguel = {
+            id: alugueis.length + 1,
+            idLivro: req.body.idLivro,
+            idEstudante: req.body.idEstudante,
+            dataAluguel: req.body.dataAluguel
+        }
+        alugueis.push(novoAluguel) 
+        res
+        .status(201)
+        .send({message: 'Aluguel cadastrado com sucesso!', aluguel: novoAluguel});
+    }
+    module.exports = {alugar};
+
+
+
+#### ATUALIZAR
+
+##### Serve para você atualizar o aluguel de um livro já existente.
+
+    const { alugueis } = require('../data');
+
+    const atualizar = (req,res) => {
+        // Extrai o ID dos parâmetros da URL
+        const { id } = req.params;
+        const novaDataAluguel = req.body.dataAluguel;
+        const novaDataDevolucao = req.body.dataDevolucao;
+
+        // Encontar o aluguel pelo ID
+        const aluguel = alugueis.find((b) => b.id == id);
+
+        if (!aluguel) {
+            return res.status(404).send({message: 'Aluguel não encontrado'})
+        }
+
+        // Atualiza as informações e envia uma resposta de sucesso 
+        aluguel.dataAluguel = novaDataAluguel;
+        aluguel.dataDevolucao = novaDataDevolucao;
+        res.status(200).send({
+            message: 'Aluguel atualizado com sucesso!',
+            aluguel: aluguel
+        });
+    }
+
+    module.exports = { atualizar }
+
+#### DELETAR
+
+##### Serve para você deletar um aluguel ja esxistente.
+
+    const { alugueis } = require('../data');
+
+    const deletar = (req, res) => {
+        // Extrai o ID dos parâmetros da URL
+        const { id } = req.params;
+
+        // Encontar o aluguel pelo ID
+        const index = alugueis.findIndex((b) => b.id == id);
+
+        if ( index === -1) {
+            return res.status(404).send('Aluguel não encontrado!');
+        }
+        // Deleta o aluguel e retorna uma array com o elemento removido
+        const aluguelDeletado = alugueis.splice(index, 1)[0];
+        res.status(200).send({
+            message: 'Aluguel deletado com sucesso!',
+            aluguel: aluguelDeletado
+        })
+    }
+
+    module.exports = {deletar}
+
+#### LISTAR
+
+##### Serve para listar os alugueis existentes no servidor
+
+    const { alugueis } = require('../data');
+
+    const listar = (req, res) => {
+        res.status(200).send(alugueis);
+    }
+
+    module.exports = {listar};
