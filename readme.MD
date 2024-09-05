@@ -1,12 +1,87 @@
+# TRABALHO
+
+## INTEGRANTES E O QUE FIZERAM
 A divisão da equipe ficou assim:
 
 Murilo: Escolheu e fez a parte dos estudantes.
 Conrado: Escolheu e fez a parte dos livros.
 Gabriel Lazarini: Escolheu e fez a parte do aluguel.
 
-A parte dos livros serve para adicionar, listar, atualizar e deletar as informações relacionadas aos livros, como mostrado no código a seguir:
 
-adicionar: 
+### DESCRIÇÃO
+
+O trabalho em questão é sobre o aluguel de livros, precisando conter as informações sobre Estudante que alugou, os livros que foram alugados, a data do aluguel e a data da devolução do livro.
+
+As informações em questão são essas:
+
+#### Livro:
+• id
+
+• título
+
+• autor
+
+• ano
+
+• gênero
+
+#### Estudante: 
+• id
+
+• nome
+
+• matrícula
+
+• curso
+
+• ano
+
+#### Aluguel:
+
+• id
+
+• idLivro
+
+• idEstudante
+
+• dataAluguel
+
+• dataDevolucao
+
+A seguir estará representado as partes do código de cada um dos tes aspectos citados em questão divididos em adicionar, listar, atualizar e deletar:
+
+### Livros
+
+Essa é a constituição central do código em relação a parte dos livros, com cada opção sendo explicada a seguir:
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+const adicionarLivro = require('./livros/adicionarLivro');
+app.post('/livros', adicionarLivro);
+
+const listarLivros = require('./livross/listarLivros');
+app.get('/livros', listarLivros);
+
+const atualizarLivro = require('./livros/atualizarLivro');
+app.put('/livros/:id', atualizarLivro);
+
+const deletarLivro = require('./livros/deletarLivro');
+app.delete('livros/:id', deletarLivro);
+
+app.use((req, res) => {
+    res.status(404).send('Página não encontrada!');
+    });
+
+app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:$
+    {port}`);
+});
+
+#### ADICIONAR
+
+A parte de adicionar dos livros serve para adicionar um novo livro ao sistema: 
 
 const {livros} = require('../data');
 
@@ -24,7 +99,9 @@ function adicionarLivro(req, res) {
 
 module.exports = adicionarLivro
 
-listar: 
+#### LISTAR
+
+A parte de listar tem como função listar todos os livros presentes no sistema: 
 
 const {livros} = require('../data');
 
@@ -34,7 +111,9 @@ const listarLivros = (req, res) => {
 
 module.exports = listarLivros;
 
-atualizar:
+#### ATUALIZAR
+
+A opção de atualizar serve para atualizar as informações de livros cadastrados no sistema:
 
 const {livros} = require('../data');
 
@@ -56,7 +135,9 @@ const atualizarLivro = (req, res) => {
 
 module.exports = atualizarLivro
 
-deletar:
+#### DELETARt
+
+A parte de deletar acaba removendo o livro selecionado do sistema:
 
 const { livros} = require('../data')
 
