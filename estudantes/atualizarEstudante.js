@@ -3,7 +3,7 @@ const estudantes = require('../data');
 const atualizarEstudante = (req, res) => {
     const { id } = req.params;
     const novoNome = req.body.nome
-    const novaMatricula = req.body.novaMatricula
+    const novaMatricula = req.body.matricula
     const novoCurso = req.body.curso
     const novoAno = req.body.ano
 
@@ -23,4 +23,4 @@ const atualizarEstudante = (req, res) => {
     });
 }
 
-module.exports = atualizarEstudante;
+module.exports = {atualizarEstudante};

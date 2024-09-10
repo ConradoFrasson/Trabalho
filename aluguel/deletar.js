@@ -7,7 +7,7 @@ const deletar = (req, res) => {
     // Encontar o aluguel pelo ID
     const index = alugueis.findIndex((b) => b.id == id);
 
-    if ( index === -1) {
+    if (index === -1) {
         return res.status(404).send('Aluguel não encontrado!');
     }
     // Deleta o aluguel e retorna uma array com o elemento removido
@@ -18,4 +18,4 @@ const deletar = (req, res) => {
     })
 }
 
-module.exports = {deletar}
+module.exports = { deletar }
