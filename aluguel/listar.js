@@ -4,4 +4,4 @@ const listar = (req, res) => {
     res.status(200).send(alugueis);
 }
 
-module.exports = {listar};
+module.exports = { listar };

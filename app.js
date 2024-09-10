@@ -4,20 +4,31 @@ const port = 3000;
 app.use(express.json())
 
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:$
-    {port}`);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
-const adicionarLivro = require('./livros/adicionarLivro');
+const {criarEstudante} = require('./estudantes/adicionarEstudante');
+app.post('/estudantes', criarEstudante);
+
+const {listarEstudantes} = require('./estudantes/listarEstudantes');
+app.get('/estudantes', listarEstudantes);
+
+const {atualizarEstudante} = require('./estudantes/atualizarEstudante');
+app.put('/estudantes/:id', atualizarEstudante);
+
+const {deletarEstudantes} = require('./estudantes/deletarEstudante');
+app.delete('/estudantes/:id', deletarEstudantes);
+
+const {adicionarLivro} = require('./livros/adicionar');
 app.post('/livros', adicionarLivro);
 
-const listarLivros = require('./livros/listarLivros');
+const {listarLivros} = require('./livros/listar');
 app.get('/livros', listarLivros);
 
-const atualizarLivro = require('./livros/atualizarLivro');
+const {atualizarLivro} = require('./livros/atualizar');
 app.put('/livros/:id', atualizarLivro);
 
-const deletarLivro = require('./livros/deletarLivro');
+const {deletarLivro} = require('./livros/deletar');
 app.delete('livros/:id', deletarLivro);
 
 const {listar} = require('./aluguel/listar');
