@@ -15,4 +15,4 @@ const deletarEstudantes = (req, res) => {
     })
 } 
 
-module.exports = { deletarEstudantes }
+module.exports = { deletarEstudantes };

@@ -16,6 +16,9 @@ app.get('/estudantes', listarEstudantes);
 const {atualizarEstudante} = require('./estudantes/atualizarEstudante');
 app.put('/estudantes/:id', atualizarEstudante);
 
+const {deletarEstudantes} = require('./estudantes/deletarEstudante');
+app.delete('/estudantes/:id', deletarEstudantes);
+
 const {adicionarLivro} = require('./livros/adicionar');
 app.post('/livros', adicionarLivro);
 
